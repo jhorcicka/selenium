@@ -42,49 +42,6 @@ public abstract class Tester {
         return driver.getTitle();
     }
 
-    public List<Integer> getIds(String name) {
-        if (name == null) {
-            return getINTISIds();
-        } else {
-            return getWebIds(name);
-        }
-    }
-
-    private List<Integer> getINTISIds() {
-        List<Integer> ids = new ArrayList<>();
-        String xpath = "//a[@tabindex='-1' and starts-with(@href, 'http://trunk.') and contains(@href, 'nahled')]";
-        List<WebElement> foundElements = driver.findElements(By.xpath(xpath));
-
-        for (WebElement element : foundElements) {
-            String hrefValue = element.getAttribute("href");
-            String paramName = "ac_id=";
-            int fromIndex = hrefValue.indexOf(paramName) + paramName.length();
-            int toIndex = hrefValue.length();
-            String idString = hrefValue.substring(fromIndex, toIndex);
-            Integer newId = Integer.parseInt(idString);
-            ids.add(newId);
-        }
-
-        return ids;
-    }
-
-    private List<Integer> getWebIds(String name) {
-        List<Integer> ids = new ArrayList<>();
-        String xpath = "//*[@type='submit' and starts-with(@name, '" + name + "')]";
-        List<WebElement> foundElements = driver.findElements(By.xpath(xpath));
-        int fromIndex = name.length() + 1;
-
-        for (WebElement element : foundElements) {
-            String nameValue = element.getAttribute("name");
-            int toIndex = nameValue.length() - 1;
-            String idString = nameValue.substring(fromIndex, toIndex);
-            Integer newId = Integer.parseInt(idString);
-            ids.add(newId);
-        }
-
-        return ids;
-    }
-
     public void submit(String text) {
         WebElement element = getElement(text);
 
@@ -203,6 +160,10 @@ public abstract class Tester {
                 break;
             } catch (WebDriverException noSuchElement) {
             }
+        }
+
+        if (element == null) {
+            throw new NoSuchElementException("There is no element identified by: " + text);
         }
 
         return element;

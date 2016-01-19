@@ -19,10 +19,10 @@ public class WebTester extends Tester {
     }
 
     private void initConstants() {
-        USERNAME = "msvec5655";
-        PASSWORD = "91gkg3";
-        DEFAULT_URL = "http://www.trunk.jhorcicka.test.cz/run-12?ac=form&node=12";
-        DEFAULT_TITLE = "FG: Web - run";
+        USERNAME = "";
+        PASSWORD = "";
+        DEFAULT_URL = "";
+        DEFAULT_TITLE = "";
     }
 
     @Override

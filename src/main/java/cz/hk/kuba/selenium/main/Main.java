@@ -6,6 +6,7 @@ import java.util.List;
 import org.openqa.selenium.UnhandledAlertException;
 
 import cz.hk.kuba.selenium.db.Db;
+import cz.hk.kuba.selenium.testcase.DCWebsite;
 import cz.hk.kuba.selenium.testcase.Google;
 import cz.hk.kuba.selenium.tester.WebTester;
 
@@ -18,7 +19,7 @@ public class Main {
 
     private static void doWebTests() {
         List<WebTester> testers = new ArrayList<>();
-        testers.add(new Google("http://www.atlas.cz"));
+        testers.add(new DCWebsite("http://127.0.0.1:8888"));
 
         for (WebTester tester : testers) {
             try {
